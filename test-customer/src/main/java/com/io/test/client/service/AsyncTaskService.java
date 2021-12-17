@@ -24,7 +24,7 @@ public class AsyncTaskService {
     }
 
     @SneakyThrows
-    @Async("otherTaskExecutor")
+    @Async("asyncPoolTaskExecutor")
     public void doTask2() {
         long t1 = System.currentTimeMillis();
         Thread.sleep(3000);
