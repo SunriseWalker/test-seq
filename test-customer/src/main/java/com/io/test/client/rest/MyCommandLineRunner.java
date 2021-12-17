@@ -1,5 +1,6 @@
 package com.io.test.client.rest;
 
+import com.io.test.client.eneity.ReqParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -26,20 +27,20 @@ public class MyCommandLineRunner implements CommandLineRunner,Ordered {
 
     @Override
     public void run(String... args) throws Exception {
-        restTemplate.getForObject("http://test-spring-seq/test/hello", TestParam.class);
+        restTemplate.getForObject("http://test-spring-seq/test/hello", ReqParam.class);
         log.info("===========================feign start=======================================");
-        TestParam testParam =new TestParam();
-        testParam.setMsg("feign request send ");
-        testParam= seqService.sayHello(testParam);
+        ReqParam reqParam =new ReqParam();
+        reqParam.setMsg("feign request send ");
+        reqParam = seqService.sayHello(reqParam);
         log.warn("=============================feign end=====================================");
         log.warn("===========================restTemplate start=======================================");
-        testParam.setMsg("restTemplate request send ");
+        reqParam.setMsg("restTemplate request send ");
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<TestParam> httpEntity = new HttpEntity<>(testParam,headers);
+        HttpEntity<ReqParam> httpEntity = new HttpEntity<>(reqParam,headers);
 
         String url = "http://test-spring-seq/test/hello";
-        testParam = restTemplate.postForObject(url, httpEntity, TestParam.class);
+        reqParam = restTemplate.postForObject(url, httpEntity, ReqParam.class);
         log.info("===============================restTemplate end===================================");
     }
 

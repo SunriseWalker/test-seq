@@ -1,5 +1,6 @@
 package com.io.test.client.rest;
 
+import com.io.test.client.eneity.ReqParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -24,36 +25,36 @@ public class ClientRest {
     SeqService seqService;
 
     @GetMapping("hello")
-    public TestParam sayHello() {
+    public ReqParam sayHello() {
         log.info("client  seqService controller");
         return seqService.sayHello();
     }
 
     @GetMapping("/hello1")
-    public TestParam sayHello1() {
+    public ReqParam sayHello1() {
         log.info("client restTemplate controller");
         String url = "http://test-spring-seq/test/hello";
 //        String url="http://localhost:8080/test/hello";
-        return restTemplate.getForObject(url, TestParam.class);
+        return restTemplate.getForObject(url, ReqParam.class);
     }
 
     @PostMapping("/template/hello")
-    public TestParam templateHello(@RequestBody TestParam testParam) {
-        String msg = testParam.getMsg();
+    public ReqParam templateHello(@RequestBody ReqParam reqParam) {
+        String msg = reqParam.getMsg();
         log.info(" client template controller, msg=" + msg);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<TestParam> httpEntity = new HttpEntity<>(testParam,headers);
+        HttpEntity<ReqParam> httpEntity = new HttpEntity<>(reqParam,headers);
         String url = "http://test-spring-seq/test/hello";
-        TestParam rs = restTemplate.postForObject(url, httpEntity, TestParam.class);
+        ReqParam rs = restTemplate.postForObject(url, httpEntity, ReqParam.class);
         return rs;
     }
 
     @PostMapping("/feign/hello")
-    public TestParam feignHello(@RequestBody TestParam testParam) {
-        String msg = testParam.getMsg();
+    public ReqParam feignHello(@RequestBody ReqParam reqParam) {
+        String msg = reqParam.getMsg();
         log.info("client feign controller, msg=" + msg);
-        return seqService.sayHello(testParam);
+        return seqService.sayHello(reqParam);
     }
 
 }

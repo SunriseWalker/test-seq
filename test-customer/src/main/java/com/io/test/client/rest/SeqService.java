@@ -1,5 +1,6 @@
 package com.io.test.client.rest;
 
+import com.io.test.client.eneity.ReqParam;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,9 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 public interface SeqService {
 
     @GetMapping("hello")
-    TestParam sayHello();
+    ReqParam sayHello();
 
     @PostMapping(value = "hello", headers = {"Content-Type=application/json;charset=UTF-8"})
-    TestParam sayHello(TestParam testParam);
+    ReqParam sayHello(ReqParam reqParam);
 
 }
