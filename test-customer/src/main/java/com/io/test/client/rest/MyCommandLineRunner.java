@@ -17,7 +17,7 @@ import org.springframework.web.client.RestTemplate;
  * @Date: 2021-09-03
  */
 @Slf4j
-@Component
+//@Component
 public class MyCommandLineRunner implements CommandLineRunner,Ordered {
 
     @Autowired
