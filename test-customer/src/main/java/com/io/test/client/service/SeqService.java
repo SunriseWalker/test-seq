@@ -1,4 +1,4 @@
-package com.io.test.client.rest;
+package com.io.test.client.service;
 
 import com.io.test.client.eneity.ReqParam;
 import org.springframework.cloud.openfeign.FeignClient;

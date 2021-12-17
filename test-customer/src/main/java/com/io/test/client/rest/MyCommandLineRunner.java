@@ -1,6 +1,7 @@
 package com.io.test.client.rest;
 
 import com.io.test.client.eneity.ReqParam;
+import com.io.test.client.service.SeqService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
