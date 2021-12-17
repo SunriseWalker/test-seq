@@ -1,0 +1,33 @@
+#!/bin/sh
+warning="
+ERROR: `cat $1` \n
+\n
+请按照git提交规范填写正确的提交日志，规范如下：\n
+规则：\n
+-------------------------------------\n
+TYPE<SCOPE>: SUBJECT                 \n
+                                     \n
+CONTENT                              \n
+-------------------------------------\n
+1.TYPE:类型(必选)
+- feat：新功能(feature) \n
+- fix:修复缺陷  \n
+- doc:更新文档  \n
+- style:调整格式（例如：reformat，reimport，调整空格等）    \n
+- pref:代码优化（已有功能优化，对现有功能有一定影响）  \n
+- refactor代码重构（在不影响功能的前提下修改代码）  \n
+- test:修改测试 \n
+- build:修改构建配置（例如：pom.xml，脚本等）  \n
+- merge:解决合并冲突  \n
+2.SCOPE:范围/模块(可选)   \n
+3.SUBJECT:主体（必选）    \n
+4.CONTENT:具体内容细节（可选）    \n
+\n
+# 一次提交仅做一件事，请勿将不同类型和目的的修改合并成一次提交
+"
+
+REGEX='^(feat|fix|doc|style|refactor|pref|test|build|merge)(<\w+>)?:\s*\w.*$'
+egrep "$REGEX" "$1" | wc -1 | xargs -i [ {} -eq 1 ] || {
+    echo -e $warning
+    exit 1
+}
