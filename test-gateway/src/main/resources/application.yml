@@ -1,0 +1,32 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: test-gateway
+  #\u914D\u7F6Enacos\u6CE8\u518C\u4E2D\u5FC3\u5730\u5740
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    gateway:
+      # \u662F\u5426\u5F00\u542F\u7F51\u5173
+      enabled: true
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+            - GET
+            - POST
+            - DELETE
+            - PUT
+            - OPTION
+      routes:
+        - id: client_route
+          uri: lb://test-customer  #lb \u6574\u5408\u8D1F\u8F7D\u5747\u8861\u5668ribbon,loadbalancer
+          predicates:
+          - Path=/client/**
+        - id: test-spring-seq
+          uri: lb://test-spring-seq  #lb \u6574\u5408\u8D1F\u8F7D\u5747\u8861\u5668ribbon,loadbalancer
+          predicates:
+          - Path=/test/**
