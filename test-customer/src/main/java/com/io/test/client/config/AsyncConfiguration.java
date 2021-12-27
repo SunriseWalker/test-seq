@@ -12,7 +12,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
- * 为Async 实现一个自定义线程池
+ * 为Async 实现一个自定义线程池，实现默认线程池getAsyncExecutor()与指定线程池asyncPoolTaskExecutor
  * @Author: wangtianzhu
  * @Date: 2021-12-17
  */
